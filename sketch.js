@@ -10,7 +10,12 @@ let c;
 let nameValue;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  var element = document.getElementById('wrapper');
+  var positionInfo = element.getBoundingClientRect();
+  var height = positionInfo.height;
+  var width = positionInfo.width;
+
+  createCanvas(width, height);
 
   nameField = createInput('')
   nameField.attribute('placeholder', 'your name')
