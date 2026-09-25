@@ -15,19 +15,18 @@
       background: transparent; /* Gecko Browsers */
       }
     
-      #wrapper{
+      wrapper{
       position: relative;
       margin: 0 auto;
-      z-index: 1;
       }
     
-      #wrapper scriptcontainer{
+      .scriptcontainer{
       position: absolute;
       margin: 0 auto;
-      z-index: 2;
+      z-index: 3;
       }
 
-      #wrapper text{
+      .text{
       position: absolute;
       font-family: times;
       padding: 100px;
@@ -35,23 +34,118 @@
       padding: 20;
       font-size: 20;
       margin: 0 auto;
-      z-index: 3;
       }
     
   </style>
   
-  </head>
+</head>
   <body>
+
+  
   <div id="wrapper">
     
-    <scriptcontainer>
-      <script src="sketch.js"></script>
-    </scriptcontainer>
+    <div class="scriptcontainer">
+      <script>
+      let nameField
+      // creating global variable to store our text
+      let mySymbols;
+      // store an array representation of our text
+      let mySymbolsArray;
+      // store the current 'index' of our array of text
+      let textCounter = 0;
+      let c;
+      let nameValue;
+
+      function setup() {
+        /* var element = document.getElementById('wrapper');
+        var positionInfo = element.getBoundingClientRect();
+        var height = positionInfo.height;
+        var width = positionInfo.width; */
+
+        createCanvas(windowWidth, windowHeight*3);
+
+        nameField = createInput('')
+        nameField.attribute('placeholder', 'your name')
+        nameField.position(100, 100)
+        nameField.size(200, 30)
+
+        c = color(random(0, 255), random(0, 255), random(0, 255))
+        
+        // changing the framerate so it draws more slowly
+        frameRate(10);
+        
+        background(255);
+        
+
+        // horizontally and vertically center the text
+        textAlign(CENTER, CENTER);
+        
+      }
+
+      function draw() {
+        background(220,0);
+        
+        let x = mouseX;
+        let y = mouseY;
+        let name = nameField.value();
+        storeItem(name,'');
+        console.log(getItem(name));
+      
+        let symbols = '☻♡☮✈︎❤︎𝄞✉✿? ✶❖☛☺☀˚ ^ ❀⋆*°❁⟡☆★♡✴☘︎♬𖦹✦◆︎◈✮✧⊹ ! '
+        
+          // splitting the text letter-by-letter into an array
+          myNameArray = name.split('');
+          mySymbolsArray = symbols.split('');
+
+          textArray = name + symbols;
+        
+        // only when the mouse is pressed...
+        if(mouseIsPressed) {
+          // draw 'hello world!'
+          
+          // isolate our rotation to the text being drawn
+          push();
+          textSize(40);
+          // move to our new position
+          translate(x, y);
+          // rotate random amount around that new position
+          rotate(random(-PI,PI));
+          fill(getRandomColour())
+          // drawing whatever is at the 'textCounter' index of the array
+          // using modulus to 'wrap' back around after hitting the end of the text
+          text(textArray[textCounter % textArray.length], 0, 0);    
+          pop();
+          
+        }
+
+        // increasing the counter each frame
+        // so the next letter can be drawn
+        textCounter = textCounter + 1;
+        
+      }
+
+      function getRandomColour() {
+        const r = random(145, 255);
+        const g = random(145, 255);
+        const b = random(145, 255);
+        return color(r, g, b);
+      }
+
+      function mousePressed() {
+        // reset
+        textCounter = 0;
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+      </script>
+    </div>
     
-    <text>
+    <div class="text">
         <p>
         <br> <br>
-        
+        <a href="guestbook.html">Guestbook</a> <br> <br>
         Every Day of Peace in the Last Hundred Years is a shelter in the middle of a labyrinth. After conquering the million identical halls of A Space Gallery, here I am: inside a small gallery, floor-to-ceiling sheets cover every wall. A bowl of white school erasers sits on a little plinth in the center of the room. <br> <br>
         
         Moez Surani and Nina Leo’s installation is an adaptation of Surani’s book that lists  every day in the past hundred years without active interstate conflict. Only the dates of peace are recorded, with massive stretches of silence between them, entire pages completely blank. In contrast, the massive pages hung in the gallery are pencilled with every date of conflict in the last hundred years. Our job is to erase them. <br> <br>
@@ -139,7 +233,7 @@ LADDER POWER BOY:	I knowww… I’ve been using it for a long time.
 <img src="link.png">
 
 </p>
-    </text>
+</div>
     
   </div>
   </body>

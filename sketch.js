@@ -10,12 +10,12 @@ let c;
 let nameValue;
 
 function setup() {
-  var element = document.getElementById('wrapper');
+  /* var element = document.getElementById('wrapper');
   var positionInfo = element.getBoundingClientRect();
   var height = positionInfo.height;
-  var width = positionInfo.width;
+  var width = positionInfo.width; */
 
-  createCanvas(width, height);
+  createCanvas(windowWidth, windowHeight*3);
 
   nameField = createInput('')
   nameField.attribute('placeholder', 'your name')
@@ -87,4 +87,8 @@ function getRandomColour() {
 function mousePressed() {
   // reset
   textCounter = 0;
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
